@@ -8,7 +8,7 @@ const bot = new Telegraf('5699809193:AAHYziujok-YHkt1iO5Y1E8GHbQl0vrlwfw');
 const fetch = require('node-fetch');
 let myToken = "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"
 bot.launch();
-bot.telegram.setMyCommands([{ command: 'set_updates', description: 'Starting Automated Update' }])
+bot.telegram.setMyCommands([{ command: 'set_updates', description: 'Starting Automated Update' },{ command: 'stop_updates', description: 'Stopping Automated Update' }])
 let allSubbedRepos =[]
 let intervalId;
 bot.command('set_updates', (ctx) => {
