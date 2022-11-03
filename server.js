@@ -10,6 +10,7 @@ let myToken = "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"
 bot.launch();
 bot.telegram.setMyCommands([{ command: 'set_updates', description: 'Starting Automated Update' }])
 let allSubbedRepos =[]
+let intervalId;
 bot.command('set_updates', (ctx) => {
     let channelName = ""
     let repoLink = ""
@@ -34,7 +35,7 @@ bot.command('set_updates', (ctx) => {
                 channelName=""
                 repoLink=""
                 allSubbedRepos.push(subbedRepo)
-                setInterval(() => {
+               intervalId =  setInterval(() => {
                     try {
                         console.log(subbedRepo)
                         allSubbedRepos.forEach(subbedRepo=>getRepoData(subbedRepo.channelName, subbedRepo.repoLink))
@@ -50,6 +51,9 @@ bot.command('set_updates', (ctx) => {
         }
     }
     )
+})
+bot.command('stop_updates',(ctx)=>{
+ clearInterval(intervalId)
 })
 function getRepoData(channelName, repoLink) {
     fetch(`https://api.github.com/repos/${repoLink}`, {
